@@ -30,6 +30,7 @@ const experiences: ExperienceEntry[] = [
     year: "2026",
     description:
       "IEO National China Gold Award & Business Case Final Round.",
+    image: "/photos/IEO.jpg",
   },
   {
     month: "NOV",
@@ -50,13 +51,14 @@ const experiences: ExperienceEntry[] = [
     year: "2024",
     description:
       "Co-founded TOKENS Economics Club — fostering interest in economics and analytical thinking.",
+    image: "/photos/TOKENS.jpg",
   },
   {
     month: "NOV",
     year: "2024",
     description:
       "Elected Student Council Vice President.",
-    image: "/photos/student_council.jpg",
+    image: "/photos/vice_president.jpg",
   },
   {
     month: "SEPT",
