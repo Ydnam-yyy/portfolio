@@ -12,18 +12,23 @@ const contactLinks = [
   },
   {
     label: "Instagram",
-    value: "@mandysun_",
-    href: "https://instagram.com/mandysun_",
+    value: "MandySun",
+    href: "https://instagram.com/MandySun",
+  },
+  {
+    label: "LinkedIn",
+    value: "Diman Sun",
+    href: "https://linkedin.com/in/diman-sun",
+  },
+  {
+    label: "YouTube",
+    value: "YDNAMMM",
+    href: "https://youtube.com/@YDNAMMM",
   },
   {
     label: "GitHub",
     value: "Ydnam-yyy",
     href: "https://github.com/Ydnam-yyy",
-  },
-  {
-    label: "LinkedIn",
-    value: "Mandy Sun",
-    href: "https://linkedin.com/in/mandy-sun",
   },
 ];
 

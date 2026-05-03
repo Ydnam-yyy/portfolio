@@ -7,44 +7,44 @@ import Link from "next/link";
 const projects = [
   {
     id: "project-1",
-    title: "Design System",
-    description: "A comprehensive component library built for scalability and consistency across multiple products.",
-    tags: ["React", "TypeScript", "Storybook"],
+    title: "Coming Soon",
+    description: "This project is currently in development. Details will be available soon.",
+    tags: [],
     accent: "#00A19C",
   },
   {
     id: "project-2",
-    title: "Analytics Dashboard",
-    description: "Real-time data visualization platform with interactive charts and customizable widgets.",
-    tags: ["Next.js", "D3.js", "WebSocket"],
+    title: "Coming Soon",
+    description: "This project is currently in development. Details will be available soon.",
+    tags: [],
     accent: "#4A90D9",
   },
   {
     id: "project-3",
-    title: "Creative Studio",
-    description: "A collaborative workspace for designers and developers to prototype and iterate together.",
-    tags: ["Figma", "React", "Node.js"],
+    title: "Coming Soon",
+    description: "This project is currently in development. Details will be available soon.",
+    tags: [],
     accent: "#E8A838",
   },
   {
     id: "project-4",
-    title: "Mobile Experience",
-    description: "Cross-platform mobile application with fluid gestures and native-feel interactions.",
-    tags: ["React Native", "Swift", "Kotlin"],
+    title: "Coming Soon",
+    description: "This project is currently in development. Details will be available soon.",
+    tags: [],
     accent: "#C060A0",
   },
   {
     id: "project-5",
-    title: "E-Commerce Platform",
-    description: "High-performance storefront with dynamic merchandising and seamless checkout flow.",
-    tags: ["Next.js", "Stripe", "Postgres"],
+    title: "Coming Soon",
+    description: "This project is currently in development. Details will be available soon.",
+    tags: [],
     accent: "#00A19C",
   },
   {
     id: "project-6",
-    title: "AI Content Tool",
-    description: "Intelligent content generation and curation platform powered by machine learning models.",
-    tags: ["Python", "FastAPI", "React"],
+    title: "Coming Soon",
+    description: "This project is currently in development. Details will be available soon.",
+    tags: [],
     accent: "#4A90D9",
   },
 ];
@@ -94,11 +94,16 @@ function ProjectCard({
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
         >
-          {/* Accent bar */}
-          <div
-            className="w-1 h-5 rounded-full mb-5"
-            style={{ backgroundColor: project.accent }}
-          />
+          {/* Accent bar + badge */}
+          <div className="flex items-center justify-between mb-5">
+            <div
+              className="w-1 h-5 rounded-full"
+              style={{ backgroundColor: project.accent }}
+            />
+            <span className="text-[9px] font-medium tracking-[0.15em] text-white/10 uppercase border border-white/[0.04] rounded-full px-2.5 py-0.5">
+              Coming Soon
+            </span>
+          </div>
 
           {/* Title */}
           <h3 className="text-lg font-bold text-white tracking-tight mb-2">
@@ -111,16 +116,18 @@ function ProjectCard({
           </p>
 
           {/* Tags */}
-          <div className="flex flex-wrap gap-x-4 gap-y-1.5">
-            {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="text-[10px] font-medium tracking-wider text-white/12 uppercase"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+          {project.tags.length > 0 && (
+            <div className="flex flex-wrap gap-x-4 gap-y-1.5">
+              {project.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="text-[10px] font-medium tracking-wider text-white/12 uppercase"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
       </Link>
     </motion.div>
