@@ -10,10 +10,10 @@ interface ImageItem {
 }
 
 const defaultImages: ImageItem[] = [
-  { src: "/photos/photo1.jpg", alt: "Portrait", color: "#1a1a2e" },
-  { src: "/photos/photo2.jpg", alt: "Studio", color: "#16213e" },
-  { src: "/photos/photo3.jpg", alt: "Travel", color: "#0f3460" },
-  { src: "/photos/photo4.jpg", alt: "Creative", color: "#1a1a2e" },
+  { src: "/photos/portrait.jpg", alt: "Portrait", color: "#1a1a2e" },
+  { src: "/photos/hobby.jpg", alt: "Studio", color: "#16213e" },
+  { src: "/photos/travel.jpg", alt: "Travel", color: "#0f3460" },
+  { src: "/photos/creative.jpg", alt: "Creative", color: "#1a1a2e" },
 ];
 
 // Non-linear stack parameters for natural depth
