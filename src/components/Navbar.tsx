@@ -3,16 +3,29 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useContact } from "./ContactContext";
 
-const navItems = [
-  { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "Experience", href: "#experience" },
-  { label: "Skills", href: "#skills" },
-  { label: "Contact", href: "#contact" },
+interface NavItem {
+  label: string;
+  href: string;
+  isAnchor?: boolean;
+  isContact?: boolean;
+}
+
+const navItems: NavItem[] = [
+  { label: "Home", href: "/" },
+  { label: "Projects", href: "/projects" },
+  { label: "Experience", href: "/#experience", isAnchor: true },
+  { label: "Skills", href: "/#skills", isAnchor: true },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "#contact", isContact: true },
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const router = useRouter();
+  const { open: openContact } = useContact();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -21,6 +34,32 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const isHome = pathname === "/";
+
+  const isActive = (item: NavItem) => {
+    if (item.isContact) return false;
+    if (item.href === "/") return pathname === "/";
+    if (item.isAnchor) return isHome && item.href === `/#${item.href.split("#")[1]}`;
+    return pathname.startsWith(item.href);
+  };
+
+  const handleNavClick = (item: NavItem, e?: React.MouseEvent) => {
+    if (item.isContact) {
+      e?.preventDefault();
+      openContact();
+      setMobileOpen(false);
+      return;
+    }
+    if (item.isAnchor && !isHome) {
+      e?.preventDefault();
+      const hash = item.href.split("#")[1];
+      router.push(`/#${hash}`);
+      setMobileOpen(false);
+      return;
+    }
+    setMobileOpen(false);
+  };
 
   return (
     <>
@@ -39,26 +78,65 @@ export default function Navbar() {
             href="/"
             className="text-xl font-bold tracking-tight text-white hover:text-[#00A19C] transition-colors duration-300"
           >
-            φ
+            &phi;
           </Link>
 
           {/* Desktop nav */}
           <ul className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <li key={item.label}>
-                <a
-                  href={item.href}
-                  className="text-sm font-medium text-white/60 hover:text-[#00A19C] transition-colors duration-300 tracking-wide"
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
+            {navItems.map((item) => {
+              const active = isActive(item);
+
+              if (item.isContact) {
+                return (
+                  <li key={item.label}>
+                    <button
+                      onClick={() => openContact()}
+                      className="text-sm font-medium text-white/60 hover:text-[#00A19C] transition-colors duration-300 tracking-wide bg-transparent border-none cursor-pointer"
+                    >
+                      {item.label}
+                    </button>
+                  </li>
+                );
+              }
+
+              if (item.isAnchor && !isHome) {
+                return (
+                  <li key={item.label}>
+                    <button
+                      onClick={(e) => handleNavClick(item, e)}
+                      className={`text-sm font-medium transition-colors duration-300 tracking-wide bg-transparent border-none cursor-pointer ${
+                        active
+                          ? "text-[#00A19C]"
+                          : "text-white/60 hover:text-[#00A19C]"
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  </li>
+                );
+              }
+
+              return (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    onClick={(e) => handleNavClick(item, e)}
+                    className={`text-sm font-medium transition-colors duration-300 tracking-wide ${
+                      active
+                        ? "text-[#00A19C]"
+                        : "text-white/60 hover:text-[#00A19C]"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
 
           {/* Mobile toggle */}
           <button
-            className="md:hidden relative w-8 h-8 flex flex-col items-center justify-center gap-1.5"
+            className="md:hidden relative w-8 h-8 flex flex-col items-center justify-center gap-1.5 cursor-pointer bg-transparent border-none"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
@@ -97,13 +175,40 @@ export default function Navbar() {
                   exit={{ opacity: 0, y: 20 }}
                   transition={{ delay: i * 0.06 }}
                 >
-                  <a
-                    href={item.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="text-2xl font-light text-white/70 hover:text-[#00A19C] transition-colors duration-300"
-                  >
-                    {item.label}
-                  </a>
+                  {item.isContact ? (
+                    <button
+                      onClick={() => {
+                        openContact();
+                        setMobileOpen(false);
+                      }}
+                      className="text-2xl font-light text-white/70 hover:text-[#00A19C] transition-colors duration-300 bg-transparent border-none cursor-pointer"
+                    >
+                      {item.label}
+                    </button>
+                  ) : item.isAnchor && !isHome ? (
+                    <button
+                      onClick={(e) => handleNavClick(item, e)}
+                      className={`text-2xl font-light transition-colors duration-300 bg-transparent border-none cursor-pointer ${
+                        isActive(item)
+                          ? "text-[#00A19C]"
+                          : "text-white/70 hover:text-[#00A19C]"
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      onClick={(e) => handleNavClick(item, e)}
+                      className={`text-2xl font-light transition-colors duration-300 ${
+                        isActive(item)
+                          ? "text-[#00A19C]"
+                          : "text-white/70 hover:text-[#00A19C]"
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  )}
                 </motion.li>
               ))}
             </ul>
