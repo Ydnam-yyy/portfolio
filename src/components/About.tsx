@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import PolaroidStack from "./PolaroidStack";
 
 const galleryImages = [
-  { src: "", alt: "Portrait", color: "#1a1a2e" },
-  { src: "", alt: "Studio", color: "#16213e" },
-  { src: "", alt: "Travel", color: "#0f3460" },
-  { src: "", alt: "Creative", color: "#1a1a2e" },
+  { src: "/photos/photo1.jpg", alt: "Portrait", color: "#1a1a2e" },
+  { src: "/photos/photo2.jpg", alt: "Studio", color: "#16213e" },
+  { src: "/photos/photo3.jpg", alt: "Travel", color: "#0f3460" },
+  { src: "/photos/photo4.jpg", alt: "Creative", color: "#1a1a2e" },
 ];
 
 export default function About() {
@@ -28,7 +28,7 @@ export default function About() {
           <PolaroidStack images={galleryImages} />
         </motion.div>
 
-        {/* Right: Short intro */}
+        {/* Right: Intro */}
         <motion.div
           className="flex flex-col"
           initial={{ opacity: 0, x: 30 }}
@@ -43,17 +43,35 @@ export default function About() {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white">
             Hi, I&apos;m{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00A19C] to-[#00D4C8]">
-              Your Name
+              MandyS:)
             </span>
           </h2>
 
           <p className="text-lg md:text-xl font-light text-white/45 tracking-wide leading-relaxed mt-4">
-            Designer &amp; Developer
+            Developer &middot; Designer &middot; Innovator
           </p>
 
-          <p className="text-sm md:text-base font-light text-white/30 leading-relaxed max-w-md mt-8">
-            I craft digital experiences at the intersection of aesthetics and
-            function — building products that feel as good as they look.
+          <p className="text-sm font-light text-white/20 tracking-wide mt-1 mb-6">
+            Current student at Shanghai Starriver Bilingual School
+          </p>
+
+          <p className="text-sm md:text-base font-light text-white/30 leading-relaxed max-w-lg">
+            I&rsquo;m a systemic thinker who&rsquo;s obsessed with how things hold
+            together &mdash; and how they fall apart.
+          </p>
+
+          <p className="text-sm md:text-base font-light text-white/30 leading-relaxed max-w-lg mt-4">
+            I like building structures that feel stable, intentional, and quietly
+            elegant, whether that&rsquo;s in code, design, or ideas. Outside of
+            that, I spend a lot of time around racing, physics, and economics
+            &mdash; trying to understand speed, systems, and decisions from
+            different angles.
+          </p>
+
+          <p className="text-sm md:text-base font-light text-white/30 leading-relaxed max-w-lg mt-4">
+            I also enjoy turning ideas into real things, from leading teams to
+            starting projects &mdash; because a system only matters when it
+            actually works in the real world.
           </p>
         </motion.div>
       </div>

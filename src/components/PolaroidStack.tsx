@@ -10,16 +10,16 @@ interface ImageItem {
 }
 
 const defaultImages: ImageItem[] = [
-  { src: "", alt: "Photo 1", color: "#1a1a2e" },
-  { src: "", alt: "Photo 2", color: "#16213e" },
-  { src: "", alt: "Photo 3", color: "#0f3460" },
-  { src: "", alt: "Photo 4", color: "#1a1a2e" },
+  { src: "/photos/photo1.jpg", alt: "Portrait", color: "#1a1a2e" },
+  { src: "/photos/photo2.jpg", alt: "Studio", color: "#16213e" },
+  { src: "/photos/photo3.jpg", alt: "Travel", color: "#0f3460" },
+  { src: "/photos/photo4.jpg", alt: "Creative", color: "#1a1a2e" },
 ];
 
 // Non-linear stack parameters for natural depth
 const stackRotations = [0, -3, 2.5, -1.8];
 const stackScales = [1, 0.96, 0.91, 0.86];
-const stackOffsetsY = [0, 8, 17, 28];
+const stackOffsetsY = [0, 9, 19, 31];
 
 function PolaroidCard({
   image,
@@ -64,7 +64,7 @@ function PolaroidCard({
       style={isTop ? { x, rotate } : undefined}
       whileDrag={isTop ? { scale: 1.03 } : undefined}
     >
-      <div className="w-full h-full bg-white rounded-2xl overflow-hidden shadow-2xl shadow-black/30 flex flex-col p-2.5 pb-5">
+      <div className="w-full h-full bg-white rounded-2xl overflow-hidden shadow-2xl shadow-black/30 flex flex-col p-3 pb-5">
         <div
           className="flex-1 w-full rounded-xl"
           style={{ backgroundColor: image.color }}
@@ -128,9 +128,9 @@ export default function PolaroidStack({ images = defaultImages }: { images?: Ima
   };
 
   return (
-    <div className="relative w-full max-w-[400px] h-[520px] mx-auto flex items-center justify-center">
+    <div className="relative w-full max-w-[440px] h-[580px] mx-auto flex items-center justify-center">
       {/* Card stack */}
-      <div className="relative w-[300px] h-[400px]">
+      <div className="relative w-[320px] h-[430px]">
         <AnimatePresence mode="popLayout">
           {visibleCards.map(({ imgIdx, stackLevel }) => (
             <PolaroidCard
